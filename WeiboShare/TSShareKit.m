@@ -331,7 +331,7 @@ static TSShareKit *shareKit = nil;
     TSShareKitType type = shareWebViewController.type;
     switch (type) {
         case TSShareKitTypeSina:
-            url = [NSString stringWithFormat:@"https://api.weibo.com/oauth2/access_token?client_id=1477207731&client_secret=c4191cd2eef1ea9dc737ffea78958839&grant_type=authorization_code&redirect_uri=http://itools.hk&code=%@", code];
+            url = [NSString stringWithFormat:@"https://api.weibo.com/oauth2/access_token?client_id=%@&client_secret=%@&grant_type=authorization_code&redirect_uri=http://itools.hk&code=%@", SINA_APP_KEY, SINA_APP_SECRET, code];
             break;
         case TSShareKitTypeTX:
         {
@@ -341,7 +341,7 @@ static TSShareKit *shareKit = nil;
                 [userDefault synchronize];
             }
             
-            url = [NSString stringWithFormat:@"https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=801066314&client_secret=d4b1d723d5cdd5311dd37a9cba717b31&redirect_uri=http://itools.hk&grant_type=authorization_code&code=%@", code];
+            url = [NSString stringWithFormat:@"https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%@&client_secret=%@&redirect_uri=http://itools.hk&grant_type=authorization_code&code=%@", TX_APP_KEY, TX_APP_SECRET, code];
         }
             break;
             
