@@ -14,9 +14,13 @@
 #define SINA_APP_KEY         @""
 #define SINA_APP_SECRET      @""
 
+#define SINA_REDIRECT_URI @""
+
 //修改为申请的腾讯微博的key和secret
 #define TX_APP_KEY           @""
 #define TX_APP_SECRET        @""
+
+#define TX_REDIREXT_URI @""
 
 static TSShareKit *shareKit = nil;
 
@@ -68,10 +72,10 @@ static TSShareKit *shareKit = nil;
     NSString *url = nil;
     switch (type) {
         case TSShareKitTypeSina:
-            url = [NSString stringWithFormat:@"https://api.weibo.com/oauth2/authorize?client_id=%@&response_type=code&redirect_uri=http://itools.hk", SINA_APP_KEY];
+            url = [NSString stringWithFormat:@"https://api.weibo.com/oauth2/authorize?client_id=%@&response_type=code&redirect_uri=%@", SINA_APP_KEY, SINA_REDIRECT_URI];
             break;
         case TSShareKitTypeTX:
-            url = [NSString stringWithFormat:@"https://open.t.qq.com/cgi-bin/oauth2/authorize?client_id=%@&response_type=code&redirect_uri=http://itools.hk", TX_APP_KEY];
+            url = [NSString stringWithFormat:@"https://open.t.qq.com/cgi-bin/oauth2/authorize?client_id=%@&response_type=code&redirect_uri=%@", TX_APP_KEY, TX_REDIREXT_URI];
             break;
             
         default:
@@ -331,7 +335,7 @@ static TSShareKit *shareKit = nil;
     TSShareKitType type = shareWebViewController.type;
     switch (type) {
         case TSShareKitTypeSina:
-            url = [NSString stringWithFormat:@"https://api.weibo.com/oauth2/access_token?client_id=%@&client_secret=%@&grant_type=authorization_code&redirect_uri=http://itools.hk&code=%@", SINA_APP_KEY, SINA_APP_SECRET, code];
+            url = [NSString stringWithFormat:@"https://api.weibo.com/oauth2/access_token?client_id=%@&client_secret=%@&grant_type=authorization_code&redirect_uri=%@&code=%@", SINA_APP_KEY, SINA_APP_SECRET, SINA_REDIRECT_URI, code];
             break;
         case TSShareKitTypeTX:
         {
@@ -341,7 +345,7 @@ static TSShareKit *shareKit = nil;
                 [userDefault synchronize];
             }
             
-            url = [NSString stringWithFormat:@"https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%@&client_secret=%@&redirect_uri=http://itools.hk&grant_type=authorization_code&code=%@", TX_APP_KEY, TX_APP_SECRET, code];
+            url = [NSString stringWithFormat:@"https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%@&client_secret=%@&redirect_uri=%@&grant_type=authorization_code&code=%@", TX_APP_KEY, TX_APP_SECRET, TX_REDIREXT_URI, code];
         }
             break;
             
